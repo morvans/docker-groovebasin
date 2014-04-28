@@ -14,9 +14,9 @@ RUN ln -s /bin/true /sbin/initctl
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install python-software-properties
 
 # Add some PPAs
-RUN sudo apt-add-repository ppa:andrewrk/libgroove
-RUN sudo apt-add-repository ppa:chris-lea/node.js
-RUN sudo apt-get update
+RUN apt-add-repository ppa:andrewrk/libgroove
+RUN apt-add-repository ppa:chris-lea/node.js
+RUN apt-get update
 
 # Install build & core tools
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential git vim-tiny
@@ -43,6 +43,7 @@ ADD ./supervisord.conf /etc/supervisord.conf
 
 RUN chmod 755 /start.sh /home/groovebasin/foreground.sh
 
-EXPOSE 80
-VOLUME /musiclib
+EXPOSE 16242
+EXPOSE 6600
+VOLUME /music
 CMD ["/bin/bash", "/start.sh"]
